@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SOLUCK DEV (DD1K)</title>
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
+        
+        body { 
+            height: 100vh; overflow: hidden; color: white; 
+            background: url('background.png');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: inherit;
+            filter: blur(10px) brightness(0.6);
+            z-index: -1;
+            transform: scale(1.1);
+        }
+
+        .navbar { position: fixed; top: 0; left: 0; width: 100%; padding: 15px 35px; display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,.3); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255,255,255,.1); z-index: 999; }
+        .logo { display: flex; align-items: center; gap: 12px; }
+        .logo img { width: 40px; }
+        .discord-btn { padding: 10px 20px; border-radius: 20px; border: none; cursor: pointer; background: #5865F2; color: white; font-weight: bold; transition: 0.3s; }
+        .discord-btn:hover { background: #4752C4; }
+        
+        .container { height: 100vh; display: flex; justify-content: center; align-items: center; gap: 50px; padding: 100px; }
+        .logo-area { width: 400px; }
+        
+        .logo-area img { 
+            width: 100%; 
+            animation: float 3s ease-in-out infinite, shimmer 2s infinite alternate; 
+            filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3)); 
+        }
+        
+        @keyframes shimmer {
+            0% { filter: drop-shadow(0 0 10px rgba(255, 142, 231, 0.5)); }
+            100% { filter: drop-shadow(0 0 30px rgba(255, 142, 231, 0.8)); }
+        }
+        
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+        
+        .content { max-width: 600px; }
+        h1 { font-size: 70px; margin-bottom: 20px; }
+        .blue { color: #ff8ee7; }
+        
+        /* สไตล์ปุ่ม */
+        .btn-group { display: flex; gap: 15px; margin-top: 30px; }
+        .play { padding: 15px 40px; border: none; border-radius: 10px; cursor: pointer; font-size: 18px; font-weight: bold; transition: .3s; }
+        .btn-play { background: #ff8ee7; box-shadow: 0 0 15px #ff8ee7; color: white; }
+        .btn-play:hover { transform: scale(1.05); box-shadow: 0 0 30px #ff8ee7; }
+        .btn-group-link { background: #5865F2; box-shadow: 0 0 15px #5865F2; color: white; }
+        .btn-group-link:hover { transform: scale(1.05); box-shadow: 0 0 30px #5865F2; }
+        
+        #player { position: absolute; top: -9999px; left: -9999px; }
+    </style>
+</head>
+<body>
+
+<div id="player"></div>
+
+<div class="navbar">
+    <div class="logo">
+        <img src="logo.png" alt="Logo">
+        <span>SOLUCK DEV (DD1K)</span>
+    </div>
+    <button class="discord-btn" onclick="window.open('https://discord.gg/W5vzp7KZe2', '_blank')">Join Discord</button>
+</div>
+
+<div class="container">
+    <div class="logo-area">
+        <img src="logo.png" alt="Big Logo">
+    </div>
+    <div class="content">
+        <h1>Welcome to<br><span class="blue">SOLUCK DEV</span></h1>
+        <p>ประสบการณ์ใหม่จากสตูดิโอเรา พร้อมระบบ Roleplay คุณภาพสูง</p>
+        <p>ประสบการณ์ใหม่ๆที่ไม่เหมือนที่ไหนแปลกแนว</p>
+        <p>- รอเปินนะ</p>
+        
+        <div class="btn-group">
+            <button class="play btn-play" onclick="joinGame()">▶ PLAY NOW</button>
+            <button class="play btn-group-link" onclick="window.open('https://www.roblox.com/th/communities/35763441/Min-Town#!/about', '_blank')">▶ JOIN GROUP</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    let player;
+    let isReady = false;
+
+    function onYouTubeIframeAPIReady() {
+        player = new YT.Player('player', {
+            videoId: 'busNhPT-Lew',
+            playerVars: { 'autoplay': 1, 'loop': 1, 'playlist': 'busNhPT-Lew', 'controls': 0 },
+            events: {
+                'onReady': (event) => {
+                    isReady = true;
+                    event.target.mute(); 
+                    event.target.playVideo();
+                }
+            }
+        });
+    }
+
+    function startMusic() {
+        if (isReady && player) {
+            player.unMute();
+            player.setVolume(100);
+            player.playVideo();
+        }
+    }
+
+    document.body.addEventListener('click', () => {
+        startMusic();
+    }, { once: true });
+
+    function joinGame() {
+        startMusic();
+        window.location.href = "roblox://placeId=125143761363854";
+    }
+</script>
+
+</body>
+</html>
