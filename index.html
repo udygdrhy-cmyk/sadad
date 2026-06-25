@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>SOLUCK DEV (DD1K)</title>
-    <script src="https://www.youtube.com/iframe_api"></script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
         
@@ -51,20 +50,27 @@
         h1 { font-size: 70px; margin-bottom: 20px; }
         .blue { color: #ff8ee7; }
         
-        /* สไตล์ปุ่ม */
-        .btn-group { display: flex; gap: 15px; margin-top: 30px; }
-        .play { padding: 15px 40px; border: none; border-radius: 10px; cursor: pointer; font-size: 18px; font-weight: bold; transition: .3s; }
+        .btn-group { display: flex; gap: 15px; margin-top: 30px; flex-wrap: wrap; align-items: center; }
+        .play { padding: 15px 30px; border: none; border-radius: 10px; cursor: pointer; font-size: 16px; font-weight: bold; transition: .3s; display: flex; align-items: center; gap: 10px; }
+        
         .btn-play { background: #ff8ee7; box-shadow: 0 0 15px #ff8ee7; color: white; }
         .btn-play:hover { transform: scale(1.05); box-shadow: 0 0 30px #ff8ee7; }
+        
         .btn-group-link { background: #5865F2; box-shadow: 0 0 15px #5865F2; color: white; }
         .btn-group-link:hover { transform: scale(1.05); box-shadow: 0 0 30px #5865F2; }
         
-        #player { position: absolute; top: -9999px; left: -9999px; }
+        .btn-ig { background: #E1306C; box-shadow: 0 0 15px #E1306C; color: white; }
+        .btn-ig:hover { transform: scale(1.05); box-shadow: 0 0 30px #E1306C; }
+        
+        /* สไตล์ไอคอนในปุ่ม */
+        .btn-icon { width: 20px; height: 20px; }
     </style>
 </head>
 <body>
 
-<div id="player"></div>
+<audio id="bgMusic" loop>
+    <source src="ชิชิงอน สับโดด.mp3" type="audio/mpeg">
+</audio>
 
 <div class="navbar">
     <div class="logo">
@@ -87,42 +93,27 @@
         <div class="btn-group">
             <button class="play btn-play" onclick="joinGame()">▶ PLAY NOW</button>
             <button class="play btn-group-link" onclick="window.open('https://www.roblox.com/th/communities/35763441/Min-Town#!/about', '_blank')">▶ JOIN GROUP</button>
+            
+            <button class="play btn-ig" onclick="window.open('https://www.instagram.com/ggg316898/?hl=en', '_blank')">
+                <img src="AAADWADW.png" class="btn-icon"> FOLLOW IG
+            </button>
         </div>
     </div>
 </div>
 
 <script>
-    let player;
-    let isReady = false;
+    const audio = document.getElementById("bgMusic");
 
-    function onYouTubeIframeAPIReady() {
-        player = new YT.Player('player', {
-            videoId: 'busNhPT-Lew',
-            playerVars: { 'autoplay': 1, 'loop': 1, 'playlist': 'busNhPT-Lew', 'controls': 0 },
-            events: {
-                'onReady': (event) => {
-                    isReady = true;
-                    event.target.mute(); 
-                    event.target.playVideo();
-                }
-            }
-        });
-    }
-
-    function startMusic() {
-        if (isReady && player) {
-            player.unMute();
-            player.setVolume(100);
-            player.playVideo();
-        }
+    function playAudio() {
+        audio.play().catch(error => { console.log("รอการโต้ตอบจากผู้ใช้"); });
     }
 
     document.body.addEventListener('click', () => {
-        startMusic();
+        playAudio();
     }, { once: true });
 
     function joinGame() {
-        startMusic();
+        playAudio();
         window.location.href = "roblox://placeId=125143761363854";
     }
 </script>
